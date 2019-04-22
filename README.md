@@ -4,6 +4,13 @@
 
 Minimalist Go package aimed at creating Console User Interfaces.
 
+## 关于本fork的说明（About this fork）
+
+Add CJK support, both edit.go and view.go. 
+修正了中文显示功能，为此我修改了`edit.go`和`view.go`。
+因为该补丁还没有被原作者采用，使用时需要用用本代码覆盖 `github.com/jroimartin/gocui` 的代码。
+2018-8-31 增加 `（* view）ReadEditor()`，能够正确过滤输入的中文，删除自动添加的占位符。
+
 ## Features
 
 * Minimalist API.
@@ -100,5 +107,11 @@ func quit(g *gocui.Gui, v *gocui.View) error {
 * [claws](https://github.com/thehowl/claws): Interactive command line client for testing websockets.
 * [terminews](http://github.com/antavelos/terminews): Terminal based RSS reader.
 * [diagram](https://github.com/esimov/diagram): Tool to convert ascii arts into hand drawn diagrams.
+* [pody](https://github.com/JulienBreux/pody): CLI app to manage Pods in a Kubernetes cluster.
+* [kubexp](https://github.com/alitari/kubexp): Kubernetes client.
+* [kcli](https://github.com/cswank/kcli): Tool for inspecting kafka topics/partitions/messages.
+* [fac](https://github.com/mkchoi212/fac): git merge conflict resolver
+* [jsonui](https://github.com/gulyasm/jsonui): Interactive JSON explorer for your terminal.
+* [cointop](https://github.com/miguelmota/cointop): Interactive terminal based UI application for tracking cryptocurrencies.
 
 Note: if your project is not listed here, let us know! :)

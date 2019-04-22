@@ -10,6 +10,7 @@ import (
 	"io"
 	"strings"
 
+	"github.com/mattn/go-runewidth"
 	"github.com/nsf/termbox-go"
 )
 
@@ -353,7 +354,7 @@ func (v *View) draw() error {
 			if err := v.setRune(x, y, c.chr, fgColor, bgColor); err != nil {
 				return err
 			}
-			x++
+			x += runewidth.RuneWidth(c.chr)
 		}
 		y++
 	}
@@ -408,6 +409,18 @@ func (v *View) clearRunes() {
 	}
 }
 
+// BufferLines returns the lines in the view's internal
+// buffer.
+func (v *View) BufferLines() []string {
+	lines := make([]string, len(v.lines))
+	for i, l := range v.lines {
+		str := lineType(l).String()
+		str = strings.Replace(str, "\x00", " ", -1)
+		lines[i] = str
+	}
+	return lines
+}
+
 // Buffer returns a string with the contents of the view's internal
 // buffer.
 func (v *View) Buffer() string {
@@ -416,6 +429,18 @@ func (v *View) Buffer() string {
 		str += lineType(l).String() + "\n"
 	}
 	return strings.Replace(str, "\x00", " ", -1)
+}
+
+// ViewBufferLines returns the lines in the view's internal
+// buffer that is shown to the user.
+func (v *View) ViewBufferLines() []string {
+	lines := make([]string, len(v.viewLines))
+	for i, l := range v.viewLines {
+		str := lineType(l.line).String()
+		str = strings.Replace(str, "\x00", " ", -1)
+		lines[i] = str
+	}
+	return lines
 }
 
 // ViewBuffer returns a string with the contents of the view's buffer that is
